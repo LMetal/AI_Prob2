@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="Network2" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="Terreno" dynamic="anchor">
+			<state id="Connesso" />
+			<state id="Sconnesso" />
+			<probabilities>0.8 0.2</probabilities>
+		</cpt>
+		<cpt id="Terreno2" dynamic="plate">
+			<state id="Sconnesso" />
+			<state id="Connesso" />
+			<parents>Terreno</parents>
+			<probabilities>0 1 1 0</probabilities>
+		</cpt>
+		<cpt id="Umidità" dynamic="anchor">
+			<state id="Secco" />
+			<state id="Umido" />
+			<probabilities>0.8 0.2</probabilities>
+		</cpt>
+		<cpt id="Umidità_2" dynamic="plate">
+			<state id="Umido" />
+			<state id="Secco" />
+			<parents>Umidità</parents>
+			<probabilities>0 1 1 0</probabilities>
+		</cpt>
+		<noisymax id="Guasto" dynamic="plate">
+			<state id="Guasto" />
+			<state id="Funzionante" />
+			<parents>Terreno2 Umidità_2</parents>
+			<strengths>0 1 0 1</strengths>
+			<parameters>0.5 0.5 0 1 0.1 0.9 0 1 0 1</parameters>
+		</noisymax>
+		<noisymax id="Accuratezza" dynamic="plate">
+			<state id="Pessima" />
+			<state id="Buona" />
+			<state id="Ottima" />
+			<parents>Terreno2 Umidità_2 Guasto</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.6000000000000001 0.3 0.1 0 0 1 0.3 0.15 0.55 0 0 1 1 0 0 0 0 1 0.005 0.005 0.99</parameters>
+		</noisymax>
+		<cpt id="Posizione_Veicolo_2" dynamic="anchor">
+			<state id="Centro" />
+			<state id="Destra" />
+			<state id="Sinistra" />
+			<probabilities>0.6 0.2 0.2</probabilities>
+		</cpt>
+		<cpt id="Posizione_Veicolo" dynamic="plate">
+			<state id="Centro" />
+			<state id="Destra" />
+			<state id="Sinistra" />
+			<parents>Posizione_Veicolo_2</parents>
+			<probabilities>1 0 0 0 1 0 0 0 1</probabilities>
+		</cpt>
+		<cpt id="Sensore_Posizione" dynamic="plate">
+			<state id="Centro" />
+			<state id="Destra" />
+			<state id="Sinistra" />
+			<parents>Accuratezza Posizione_Veicolo</parents>
+			<probabilities>0.35 0.325 0.325 0.325 0.35 0.325 0.325 0.325 0.35 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.99 0.005 0.005 0.005 0.99 0.005 0.005 0.005 0.99</probabilities>
+		</cpt>
+		<decision id="Azione" dynamic="plate">
+			<state id="Nulla" />
+			<state id="Destra" />
+			<state id="Sinistra" />
+			<parents>Sensore_Posizione</parents>
+		</decision>
+		<utility id="U" dynamic="plate">
+			<parents>Posizione_Veicolo</parents>
+			<utilities>1 0 0</utilities>
+		</utility>
+		<cpt id="Posizione_Finale" dynamic="terminal">
+			<state id="Centro" />
+			<state id="Destra" />
+			<state id="Sinistra" />
+			<parents>Azione Posizione_Veicolo</parents>
+			<probabilities>0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.05 0.9 0.9 0.05 0.05 0.05 0.05 0.9</probabilities>
+		</cpt>
+		<utility id="U_2" dynamic="terminal">
+			<parents>Posizione_Finale</parents>
+			<utilities>1 0 0</utilities>
+		</utility>
+		<maux id="U_TOT" dynamic="terminal">
+			<parents>U U_2</parents>
+			<expression>U_2+U</expression>
+		</maux>
+	</nodes>
+	<dynamic numslices="5">
+		<cpt id="Terreno2" order="1">
+			<parents>Terreno2</parents>
+			<probabilities>0.8 0.2 0.2 0.8</probabilities>
+		</cpt>
+		<cpt id="Umidità_2" order="1">
+			<parents>Umidità_2</parents>
+			<probabilities>0.9 0.1 0.1 0.9</probabilities>
+		</cpt>
+		<noisymax id="Guasto" order="1">
+			<parents>Guasto</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.5 0.5 0 1 0.1 0.9 0 1 1 0 0 1 0.1 0.9</parameters>
+		</noisymax>
+		<cpt id="Posizione_Veicolo" order="1">
+			<parents>Posizione_Veicolo Azione</parents>
+			<probabilities>0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.95 0 0.05 0.95 0 0.9 0.1 0 0.05 0 0.95 0.9 0 0.1 0.05 0 0.95</probabilities>
+		</cpt>
+	</dynamic>
+	<extensions>
+		<genie version="1.0" app="GeNIe 5.0.4722.0 ACADEMIC" name="Network2">
+			<plate leftwidth="120" rightwidth="126">65 18 657 581</plate>
+			<textbox>
+				<caption>Un veicolo autonomo deve mantenere il centro di una corsia unsando un sensore di\nposizione. Le azioni che puo’ eseguire come comandi sono Left, Stay, Right che\nmuovono il veicolo a sx, non cambiano direzione oppure a dx rispettivamente. Ogni\nazione ha sempre una probabilita’ del 90% di avere successo, mentre nel rimanente 10%\ndei casi puo’ portare in un’altra direzione (es: il veicolo e’ nel centro, esegue Stay,\nrimane al centro con prob 0.9, va a sx con prob 0.05 e va a dx con prob 0.05; similmente\nnegli altri casi).\nIl sensore di posizione ha invece un accuratezza che dipende da molti fattori. In\nparticolare, puo’ avere 3 livelli di accuratezza: ottima, buona e pessima. Nel primo caso\nla percentuale di accuratezza e; del 99% (cioe’ nel 99% dei casi segnala la posizione\ncorretta e nel restante 1% una posizione sbagliata in modo uniforme).; nel secondo caso\nl’accuratezza e’ del 90%, mentre nel terzo caso del 35%.\nL’accuratezza del sensore dipende da due fattori principali: le condizioni meterologiche e\nlo stato del terreno su cui si muove il veicolo.\nIl tempo umido causa nel 30% dei casi una pessima accuratezza e nel 15% dei casi una\nbuona (quindi nel 55% dei casi rimane ottima).\nIl terreno sconnesso causa nel 60% dei casi una accuratezza pessima e nel 30% dei casi\nbuone (ossia 10% dei casi ottima).\nLe influenze dei due fattori sull’acuratezza sono indipendenti.\nEntrambi i fattori possono inoltre causare un guasto al sensore, il che implica che la sua\naccuratezza diventa pessima.\nIl fallimento del sensore avviene nel 10% dei casi di tempo umido e nel 50% dei casi di\nterreno sconnesso (di nuovo in modo indipendente l’uno dall’altro). Non ci sono altre\ncause immediate rilevanti. C’e pero’ una probabilita’ dello 0.1 che fallisca, per altre cause\nnon modellate, all’istante successivo (degradazione del sensore).\nRicordando che scopo dell’agente automatico sul veicolo e’ mantenere il centro corsia,\nmodellare un processo decisionale in cui, a seguito di un’osservazione del sensore,\nl’agente invii al veicolo il comando opportuno, modellando il processo per 5 istanti\ntemporali, partendo dal veicolo sistemato in centro corsia.\nSi assuma un modello di evoluzione del tempo (da secco a umido e viceversa) a piacere,\ncosi’ come un modello di evoluzione del terreno.\nIl fallimento del sensore e’ permanente.</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>676 22 1109 470</position>
+			</textbox>
+			<node id="Sensore_Posizione">
+				<name>Sensore Posizione</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>276 234 377 297</position>
+				<barchart width="128" height="108" />
+			</node>
+			<node id="Posizione_Veicolo">
+				<name>Posizione Veicolo</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>279 88 374 147</position>
+				<barchart width="128" height="108" />
+			</node>
+			<node id="Posizione_Veicolo_2">
+				<name>Posizione Veicolo</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>72 88 167 147</position>
+				<barchart width="128" height="72" />
+			</node>
+			<node id="Accuratezza">
+				<name>Accuratezza</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>289 327 364 373</position>
+				<barchart width="128" height="108" />
+			</node>
+			<node id="Terreno">
+				<name>Terreno</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>97 419 151 452</position>
+				<barchart width="128" height="64" />
+			</node>
+			<node id="Umidità">
+				<name>Umidità</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>99 493 150 524</position>
+				<barchart width="128" height="64" />
+			</node>
+			<node id="Terreno2">
+				<name>Terreno</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>241 419 295 452</position>
+				<barchart width="128" height="78" />
+			</node>
+			<node id="Umidità_2">
+				<name>Umidità</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>326 493 377 524</position>
+				<barchart width="128" height="78" />
+			</node>
+			<node id="Azione">
+				<name>Azione</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>409 184 455 210</position>
+				<barchart width="128" height="108" />
+			</node>
+			<node id="U">
+				<name>U</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>378 53 405 85</position>
+				<barchart width="128" height="64" />
+			</node>
+			<node id="Guasto">
+				<name>Guasto</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>385 393 468 439</position>
+			</node>
+			<textbox>
+				<caption>guasto impossibile a t=0</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>774 525 889 539</position>
+			</textbox>
+			<node id="Posizione_Finale">
+				<name>Posizione Finale</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>547 207 635 262</position>
+			</node>
+			<node id="U_2">
+				<name>U</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>582 147 609 179</position>
+			</node>
+			<textbox>
+				<caption>leak accuratezza</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>774 544 857 558</position>
+			</textbox>
+			<node id="U_TOT">
+				<name>U_TOT</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>581 78 634 110</position>
+			</node>
+		</genie>
+	</extensions>
+</smile>
