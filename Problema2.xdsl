@@ -80,12 +80,12 @@
 			<parents>Posizione_Finale</parents>
 			<utilities>1 0 0</utilities>
 		</utility>
-		<maux id="U_TOT" dynamic="terminal">
+		<mau id="U_TOT" dynamic="terminal">
 			<parents>U U_2</parents>
-			<expression>U_2+U</expression>
-		</maux>
+			<weights>1 1</weights>
+		</mau>
 	</nodes>
-	<dynamic numslices="5">
+	<dynamic numslices="3">
 		<cpt id="Terreno2" order="1">
 			<parents>Terreno2</parents>
 			<probabilities>0.8 0.2 0.2 0.8</probabilities>
@@ -101,7 +101,7 @@
 		</noisymax>
 		<cpt id="Posizione_Veicolo" order="1">
 			<parents>Posizione_Veicolo Azione</parents>
-			<probabilities>0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.95 0 0.05 0.95 0 0.9 0.1 0 0.05 0 0.95 0.9 0 0.1 0.05 0 0.95</probabilities>
+			<probabilities>0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.04 0.95 0.01 0.04 0.95 0.01 0.9 0.09 0.01 0.04 0.01 0.95 0.9 0.01 0.09 0.04 0.01 0.95</probabilities>
 		</cpt>
 		<decision id="Azione" order="1">
 			<parents>Azione</parents>
@@ -109,18 +109,18 @@
 	</dynamic>
 	<extensions>
 		<genie version="1.0" app="GeNIe 5.0.4722.0 ACADEMIC" name="Network2">
-			<plate leftwidth="120" rightwidth="126">65 18 657 581</plate>
+			<plate leftwidth="120" rightwidth="193">65 16 680 601</plate>
 			<textbox>
 				<caption>Un veicolo autonomo deve mantenere il centro di una corsia unsando un sensore di\nposizione. Le azioni che puo’ eseguire come comandi sono Left, Stay, Right che\nmuovono il veicolo a sx, non cambiano direzione oppure a dx rispettivamente. Ogni\nazione ha sempre una probabilita’ del 90% di avere successo, mentre nel rimanente 10%\ndei casi puo’ portare in un’altra direzione (es: il veicolo e’ nel centro, esegue Stay,\nrimane al centro con prob 0.9, va a sx con prob 0.05 e va a dx con prob 0.05; similmente\nnegli altri casi).\nIl sensore di posizione ha invece un accuratezza che dipende da molti fattori. In\nparticolare, puo’ avere 3 livelli di accuratezza: ottima, buona e pessima. Nel primo caso\nla percentuale di accuratezza e; del 99% (cioe’ nel 99% dei casi segnala la posizione\ncorretta e nel restante 1% una posizione sbagliata in modo uniforme).; nel secondo caso\nl’accuratezza e’ del 90%, mentre nel terzo caso del 35%.\nL’accuratezza del sensore dipende da due fattori principali: le condizioni meterologiche e\nlo stato del terreno su cui si muove il veicolo.\nIl tempo umido causa nel 30% dei casi una pessima accuratezza e nel 15% dei casi una\nbuona (quindi nel 55% dei casi rimane ottima).\nIl terreno sconnesso causa nel 60% dei casi una accuratezza pessima e nel 30% dei casi\nbuone (ossia 10% dei casi ottima).\nLe influenze dei due fattori sull’acuratezza sono indipendenti.\nEntrambi i fattori possono inoltre causare un guasto al sensore, il che implica che la sua\naccuratezza diventa pessima.\nIl fallimento del sensore avviene nel 10% dei casi di tempo umido e nel 50% dei casi di\nterreno sconnesso (di nuovo in modo indipendente l’uno dall’altro). Non ci sono altre\ncause immediate rilevanti. C’e pero’ una probabilita’ dello 0.1 che fallisca, per altre cause\nnon modellate, all’istante successivo (degradazione del sensore).\nRicordando che scopo dell’agente automatico sul veicolo e’ mantenere il centro corsia,\nmodellare un processo decisionale in cui, a seguito di un’osservazione del sensore,\nl’agente invii al veicolo il comando opportuno, modellando il processo per 5 istanti\ntemporali, partendo dal veicolo sistemato in centro corsia.\nSi assuma un modello di evoluzione del tempo (da secco a umido e viceversa) a piacere,\ncosi’ come un modello di evoluzione del terreno.\nIl fallimento del sensore e’ permanente.</caption>
 				<font color="000000" name="Arial" size="8" />
-				<position>676 22 1109 470</position>
+				<position>828 49 1261 497</position>
 			</textbox>
 			<node id="Sensore_Posizione">
 				<name>Sensore Posizione</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>276 234 377 297</position>
+				<position>276 254 377 317</position>
 				<barchart width="128" height="108" />
 			</node>
 			<node id="Posizione_Veicolo">
@@ -128,7 +128,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>279 88 374 147</position>
+				<position>279 108 374 167</position>
 				<barchart width="128" height="108" />
 			</node>
 			<node id="Posizione_Veicolo_2">
@@ -136,7 +136,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>72 88 167 147</position>
+				<position>72 108 167 167</position>
 				<barchart width="128" height="72" />
 			</node>
 			<node id="Accuratezza">
@@ -144,7 +144,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>289 327 364 373</position>
+				<position>289 347 364 393</position>
 				<barchart width="128" height="108" />
 			</node>
 			<node id="Terreno">
@@ -152,7 +152,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>97 419 151 452</position>
+				<position>97 439 151 472</position>
 				<barchart width="128" height="64" />
 			</node>
 			<node id="Umidità">
@@ -160,7 +160,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>99 493 150 524</position>
+				<position>99 513 150 544</position>
 				<barchart width="128" height="64" />
 			</node>
 			<node id="Terreno2">
@@ -168,7 +168,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>241 419 295 452</position>
+				<position>241 439 295 472</position>
 				<barchart width="128" height="78" />
 			</node>
 			<node id="Umidità_2">
@@ -176,7 +176,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>326 493 377 524</position>
+				<position>326 513 377 544</position>
 				<barchart width="128" height="78" />
 			</node>
 			<node id="Azione">
@@ -184,7 +184,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>409 184 455 210</position>
+				<position>404 216 450 242</position>
 				<barchart width="128" height="108" />
 			</node>
 			<node id="U">
@@ -192,7 +192,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>378 53 405 85</position>
+				<position>377 61 404 93</position>
 				<barchart width="128" height="64" />
 			</node>
 			<node id="Guasto">
@@ -200,39 +200,44 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>385 393 468 439</position>
+				<position>385 413 468 459</position>
 			</node>
 			<textbox>
 				<caption>guasto impossibile a t=0</caption>
 				<font color="000000" name="Arial" size="8" />
-				<position>774 525 889 539</position>
+				<position>774 545 889 559</position>
 			</textbox>
 			<node id="Posizione_Finale">
 				<name>Posizione Finale</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>547 207 635 262</position>
+				<position>504 109 592 164</position>
 			</node>
 			<node id="U_2">
 				<name>U</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>582 147 609 179</position>
+				<position>590 75 617 107</position>
 			</node>
 			<textbox>
 				<caption>leak accuratezza</caption>
 				<font color="000000" name="Arial" size="8" />
-				<position>774 544 857 558</position>
+				<position>774 564 857 578</position>
 			</textbox>
 			<node id="U_TOT">
 				<name>U_TOT</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>581 78 634 110</position>
+				<position>622 40 675 72</position>
 			</node>
+			<textbox>
+				<caption>SPOSTAMENTO dall&apos;altra parte improbabile 1%</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>774 589 921 617</position>
+			</textbox>
 		</genie>
 	</extensions>
 </smile>
