@@ -83,6 +83,20 @@
 			<probabilities>0.8 0.2 0.2 0.8</probabilities>
 			<property id="DSL_PLATE_NODE">1 2</property>
 		</cpt>
+		<cpt id="Terreno2_3">
+			<state id="Sconnesso" />
+			<state id="Connesso" />
+			<parents>Terreno2_2</parents>
+			<probabilities>0.8 0.2 0.2 0.8</probabilities>
+			<property id="DSL_PLATE_NODE">1 3</property>
+		</cpt>
+		<cpt id="Terreno2_4">
+			<state id="Sconnesso" />
+			<state id="Connesso" />
+			<parents>Terreno2_3</parents>
+			<probabilities>0.8 0.2 0.2 0.8</probabilities>
+			<property id="DSL_PLATE_NODE">1 4</property>
+		</cpt>
 		<cpt id="Umidità_2_1">
 			<state id="Umido" />
 			<state id="Secco" />
@@ -96,6 +110,20 @@
 			<parents>Umidità_2_1</parents>
 			<probabilities>0.9 0.1 0.1 0.9</probabilities>
 			<property id="DSL_PLATE_NODE">3 2</property>
+		</cpt>
+		<cpt id="Umidità_2_3">
+			<state id="Umido" />
+			<state id="Secco" />
+			<parents>Umidità_2_2</parents>
+			<probabilities>0.9 0.1 0.1 0.9</probabilities>
+			<property id="DSL_PLATE_NODE">3 3</property>
+		</cpt>
+		<cpt id="Umidità_2_4">
+			<state id="Umido" />
+			<state id="Secco" />
+			<parents>Umidità_2_3</parents>
+			<probabilities>0.9 0.1 0.1 0.9</probabilities>
+			<property id="DSL_PLATE_NODE">3 4</property>
 		</cpt>
 		<noisymax id="Guasto_1">
 			<state id="Guasto" />
@@ -113,14 +141,30 @@
 			<parameters>0.5 0.5 0 1 0.1 0.9 0 1 1 0 0 1 0.1 0.9</parameters>
 			<property id="DSL_PLATE_NODE">4 2</property>
 		</noisymax>
-		<noisymax id="Accuratezza_2">
+		<noisymax id="Guasto_3">
+			<state id="Guasto" />
+			<state id="Funzionante" />
+			<parents>Terreno2_3 Umidità_2_3 Guasto_2</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.5 0.5 0 1 0.1 0.9 0 1 1 0 0 1 0.1 0.9</parameters>
+			<property id="DSL_PLATE_NODE">4 3</property>
+		</noisymax>
+		<noisymax id="Guasto_4">
+			<state id="Guasto" />
+			<state id="Funzionante" />
+			<parents>Terreno2_4 Umidità_2_4 Guasto_3</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.5 0.5 0 1 0.1 0.9 0 1 1 0 0 1 0.1 0.9</parameters>
+			<property id="DSL_PLATE_NODE">4 4</property>
+		</noisymax>
+		<noisymax id="Accuratezza_4">
 			<state id="Pessima" />
 			<state id="Buona" />
 			<state id="Ottima" />
-			<parents>Terreno2_2 Umidità_2_2 Guasto_2</parents>
+			<parents>Terreno2_4 Umidità_2_4 Guasto_4</parents>
 			<strengths>0 1 0 1 0 1</strengths>
 			<parameters>0.6000000000000001 0.3 0.1 0 0 1 0.3 0.15 0.55 0 0 1 1 0 0 0 0 1 0.005 0.005 0.99</parameters>
-			<property id="DSL_PLATE_NODE">5 2</property>
+			<property id="DSL_PLATE_NODE">5 4</property>
 		</noisymax>
 		<cpt id="Posizione_Veicolo_1">
 			<state id="Centro" />
@@ -162,6 +206,15 @@
 			<probabilities>0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.04 0.95 0.01 0.04 0.95 0.01 0.9 0.09 0.01 0.04 0.01 0.95 0.9 0.01 0.09 0.04 0.01 0.95</probabilities>
 			<property id="DSL_PLATE_NODE">7 2</property>
 		</cpt>
+		<noisymax id="Accuratezza_2">
+			<state id="Pessima" />
+			<state id="Buona" />
+			<state id="Ottima" />
+			<parents>Terreno2_2 Umidità_2_2 Guasto_2</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.6000000000000001 0.3 0.1 0 0 1 0.3 0.15 0.55 0 0 1 1 0 0 0 0 1 0.005 0.005 0.99</parameters>
+			<property id="DSL_PLATE_NODE">5 2</property>
+		</noisymax>
 		<cpt id="Sensore_Posizione_2">
 			<state id="Centro" />
 			<state id="Destra" />
@@ -177,16 +230,81 @@
 			<parents>Sensore_Posizione_2 Azione_1</parents>
 			<property id="DSL_PLATE_NODE">9 2</property>
 		</decision>
+		<cpt id="Posizione_Veicolo_3">
+			<state id="Centro" />
+			<state id="Destra" />
+			<state id="Sinistra" />
+			<parents>Node26 Azione_2</parents>
+			<probabilities>0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.04 0.95 0.01 0.04 0.95 0.01 0.9 0.09 0.01 0.04 0.01 0.95 0.9 0.01 0.09 0.04 0.01 0.95</probabilities>
+			<property id="DSL_PLATE_NODE">7 3</property>
+		</cpt>
+		<noisymax id="Accuratezza_3">
+			<state id="Pessima" />
+			<state id="Buona" />
+			<state id="Ottima" />
+			<parents>Terreno2_3 Umidità_2_3 Guasto_3</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.6000000000000001 0.3 0.1 0 0 1 0.3 0.15 0.55 0 0 1 1 0 0 0 0 1 0.005 0.005 0.99</parameters>
+			<property id="DSL_PLATE_NODE">5 3</property>
+		</noisymax>
+		<cpt id="Sensore_Posizione_3">
+			<state id="Centro" />
+			<state id="Destra" />
+			<state id="Sinistra" />
+			<parents>Accuratezza_3 Posizione_Veicolo_3</parents>
+			<probabilities>0.35 0.325 0.325 0.325 0.35 0.325 0.325 0.325 0.35 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.99 0.005 0.005 0.005 0.99 0.005 0.005 0.005 0.99</probabilities>
+			<property id="DSL_PLATE_NODE">8 3</property>
+		</cpt>
+		<decision id="Azione_3">
+			<state id="Nulla" />
+			<state id="Destra" />
+			<state id="Sinistra" />
+			<parents>Sensore_Posizione_3 Azione_2</parents>
+			<property id="DSL_PLATE_NODE">9 3</property>
+		</decision>
+		<cpt id="Posizione_Veicolo_4">
+			<state id="Centro" />
+			<state id="Destra" />
+			<state id="Sinistra" />
+			<parents>Posizione_Veicolo_3 Azione_3</parents>
+			<probabilities>0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.04 0.95 0.01 0.04 0.95 0.01 0.9 0.09 0.01 0.04 0.01 0.95 0.9 0.01 0.09 0.04 0.01 0.95</probabilities>
+			<property id="DSL_PLATE_NODE">7 4</property>
+		</cpt>
+		<cpt id="Sensore_Posizione_4">
+			<state id="Centro" />
+			<state id="Destra" />
+			<state id="Sinistra" />
+			<parents>Accuratezza_4 Posizione_Veicolo_4</parents>
+			<probabilities>0.35 0.325 0.325 0.325 0.35 0.325 0.325 0.325 0.35 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.99 0.005 0.005 0.005 0.99 0.005 0.005 0.005 0.99</probabilities>
+			<property id="DSL_PLATE_NODE">8 4</property>
+		</cpt>
+		<decision id="Azione_4">
+			<state id="Nulla" />
+			<state id="Destra" />
+			<state id="Sinistra" />
+			<parents>Sensore_Posizione_4 Azione_3</parents>
+			<property id="DSL_PLATE_NODE">9 4</property>
+		</decision>
 		<cpt id="Posizione_Finale">
 			<state id="Centro" />
 			<state id="Destra" />
 			<state id="Sinistra" />
-			<parents>Azione_2 Node26</parents>
+			<parents>Azione_4 Posizione_Veicolo_4</parents>
 			<probabilities>0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.05 0.9 0.9 0.05 0.05 0.05 0.05 0.9</probabilities>
 		</cpt>
 		<utility id="U_2">
 			<parents>Posizione_Finale</parents>
 			<utilities>1 0 0</utilities>
+		</utility>
+		<utility id="U_4">
+			<parents>Posizione_Veicolo_4</parents>
+			<utilities>1 0 0</utilities>
+			<property id="DSL_PLATE_NODE">10 4</property>
+		</utility>
+		<utility id="U_3">
+			<parents>Posizione_Veicolo_3</parents>
+			<utilities>1 0 0</utilities>
+			<property id="DSL_PLATE_NODE">10 3</property>
 		</utility>
 		<utility id="Node29">
 			<parents>Node26</parents>
@@ -199,8 +317,8 @@
 			<property id="DSL_PLATE_NODE">10 1</property>
 		</utility>
 		<mau id="U_TOT">
-			<parents>Node29 U_2 U_1 U</parents>
-			<weights>1 1 1 1</weights>
+			<parents>U_4 U_2 U_3 Node29 U_1 U</parents>
+			<weights>1 1 1 1 1 1</weights>
 		</mau>
 	</nodes>
 	<extensions>
@@ -210,255 +328,347 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>97 419 151 452</position>
-				<barchart active="true" />
+				<position>97 439 151 472</position>
 			</node>
 			<node id="Terreno2">
 				<name>Terreno</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>241 419 295 452</position>
-				<barchart active="true" />
+				<position>241 439 295 472</position>
 			</node>
 			<node id="Umidità">
 				<name>Umidità</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>99 493 150 524</position>
-				<barchart active="true" />
+				<position>99 513 150 544</position>
 			</node>
 			<node id="Umidità_2">
 				<name>Umidità</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>326 493 377 524</position>
-				<barchart active="true" />
+				<position>326 513 377 544</position>
 			</node>
 			<node id="Guasto">
 				<name>Guasto</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>385 393 468 439</position>
-				<barchart active="true" />
+				<position>385 413 468 459</position>
 			</node>
 			<node id="Accuratezza">
 				<name>Accuratezza</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>289 327 364 373</position>
-				<barchart active="true" width="128" height="72" />
+				<position>289 347 364 393</position>
 			</node>
 			<node id="Posizione_Veicolo_2">
 				<name>Posizione Veicolo</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>72 88 167 147</position>
-				<barchart active="true" width="128" height="72" />
+				<position>72 108 167 167</position>
 			</node>
 			<node id="Posizione_Veicolo">
 				<name>Posizione Veicolo</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>279 88 374 147</position>
-				<barchart active="true" width="128" height="72" />
+				<position>279 108 374 167</position>
 			</node>
 			<node id="Sensore_Posizione">
 				<name>Sensore Posizione</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>276 234 377 297</position>
-				<barchart active="true" width="128" height="72" />
+				<position>276 254 377 317</position>
 			</node>
 			<node id="Azione">
 				<name>Azione</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>431 188 477 214</position>
-				<barchart active="true" width="128" height="72" />
+				<position>404 216 450 242</position>
 			</node>
 			<node id="U">
 				<name>U</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>444 20 471 52</position>
-				<barchart active="true" width="119" height="58" />
+				<position>377 61 404 93</position>
 			</node>
 			<node id="Posizione_Finale">
 				<name>Posizione Finale</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>1239 207 1327 262</position>
-				<barchart active="true" width="128" height="72" />
+				<position>1712 109 1800 164</position>
 			</node>
 			<node id="U_2">
 				<name>U</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>1274 147 1301 179</position>
-				<barchart active="true" width="128" height="72" />
+				<position>1798 75 1825 107</position>
 			</node>
 			<node id="U_TOT">
 				<name>U_TOT</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>1273 78 1326 110</position>
-				<barchart active="true" width="128" height="72" />
+				<position>1830 40 1883 72</position>
 			</node>
 			<textbox>
 				<caption>Step0</caption>
 				<font color="696969" name="Arial" size="7" />
-				<position>228 549 252 561</position>
+				<position>206 569 230 581</position>
 			</textbox>
 			<textbox>
 				<caption>Step1</caption>
 				<font color="696969" name="Arial" size="7" />
-				<position>574 549 598 561</position>
+				<position>508 569 532 581</position>
 			</textbox>
 			<textbox>
 				<caption>Step2</caption>
 				<font color="696969" name="Arial" size="7" />
-				<position>920 549 944 561</position>
+				<position>810 569 834 581</position>
+			</textbox>
+			<textbox>
+				<caption>Step3</caption>
+				<font color="696969" name="Arial" size="7" />
+				<position>1112 569 1136 581</position>
+			</textbox>
+			<textbox>
+				<caption>Step4</caption>
+				<font color="696969" name="Arial" size="7" />
+				<position>1414 569 1438 581</position>
 			</textbox>
 			<node id="Terreno2_1">
 				<name>Terreno (t=1)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>587 439 641 472</position>
-				<barchart active="true" />
+				<position>543 459 597 492</position>
 			</node>
 			<node id="Umidità_2_1">
 				<name>Umidità (t=1)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>672 513 723 544</position>
-				<barchart active="true" />
+				<position>628 533 679 564</position>
 			</node>
 			<node id="Guasto_1">
 				<name>Guasto (t=1)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>731 413 814 459</position>
-				<barchart active="true" />
+				<position>687 433 770 479</position>
 			</node>
 			<node id="Accuratezza_1">
 				<name>Accuratezza (t=1)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>635 347 710 393</position>
-				<barchart active="true" width="128" height="72" />
+				<position>591 367 666 413</position>
 			</node>
 			<node id="Posizione_Veicolo_1">
 				<name>Posizione Veicolo (t=1)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>625 108 720 167</position>
-				<barchart active="true" width="128" height="72" />
+				<position>581 128 676 187</position>
 			</node>
 			<node id="Sensore_Posizione_1">
 				<name>Sensore Posizione (t=1)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>622 254 723 317</position>
-				<barchart active="true" width="128" height="72" />
+				<position>578 274 679 337</position>
 			</node>
 			<node id="Azione_1">
 				<name>Azione (t=1)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>750 216 796 242</position>
-				<barchart active="true" width="128" height="72" />
+				<position>706 236 752 262</position>
 			</node>
 			<node id="U_1">
 				<name>U (t=1)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>726 35 753 67</position>
-				<barchart active="true" width="128" height="72" />
+				<position>679 81 706 113</position>
 			</node>
 			<node id="Terreno2_2">
 				<name>Terreno (t=2)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>933 419 987 452</position>
-				<barchart active="true" />
+				<position>845 439 899 472</position>
 			</node>
 			<node id="Umidità_2_2">
 				<name>Umidità (t=2)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>1018 493 1069 524</position>
-				<barchart active="true" />
+				<position>930 513 981 544</position>
 			</node>
 			<node id="Guasto_2">
 				<name>Guasto (t=2)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>1077 393 1160 439</position>
-				<barchart active="true" />
+				<position>989 413 1072 459</position>
 			</node>
 			<node id="Accuratezza_2">
 				<name>Accuratezza (t=2)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>981 327 1056 373</position>
-				<barchart active="true" width="128" height="72" />
+				<position>893 347 968 393</position>
 			</node>
 			<node id="Node26">
 				<name>Posizione Veicolo (t=2)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>971 88 1066 147</position>
-				<barchart active="true" width="128" height="72" />
+				<position>883 108 978 167</position>
 			</node>
 			<node id="Sensore_Posizione_2">
 				<name>Sensore Posizione (t=2)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>968 234 1069 297</position>
-				<barchart active="true" width="128" height="72" />
+				<position>880 254 981 317</position>
 			</node>
 			<node id="Azione_2">
 				<name>Azione (t=2)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>1108 182 1154 208</position>
-				<barchart active="true" width="128" height="72" />
+				<position>1008 216 1054 242</position>
 			</node>
 			<node id="Node29">
 				<name>U (t=2)</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>1108 30 1135 62</position>
-				<barchart active="true" width="128" height="72" />
+				<position>981 61 1008 93</position>
+			</node>
+			<node id="Terreno2_3">
+				<name>Terreno (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1147 459 1201 492</position>
+			</node>
+			<node id="Umidità_2_3">
+				<name>Umidità (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1232 533 1283 564</position>
+			</node>
+			<node id="Guasto_3">
+				<name>Guasto (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1291 433 1374 479</position>
+			</node>
+			<node id="Accuratezza_3">
+				<name>Accuratezza (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1195 367 1270 413</position>
+			</node>
+			<node id="Posizione_Veicolo_3">
+				<name>Posizione Veicolo (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1185 128 1280 187</position>
+			</node>
+			<node id="Sensore_Posizione_3">
+				<name>Sensore Posizione (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1182 274 1283 337</position>
+			</node>
+			<node id="Azione_3">
+				<name>Azione (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1310 236 1356 262</position>
+			</node>
+			<node id="U_3">
+				<name>U (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1283 81 1310 113</position>
+			</node>
+			<node id="Terreno2_4">
+				<name>Terreno (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1449 439 1503 472</position>
+			</node>
+			<node id="Umidità_2_4">
+				<name>Umidità (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1534 513 1585 544</position>
+			</node>
+			<node id="Guasto_4">
+				<name>Guasto (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1593 413 1676 459</position>
+			</node>
+			<node id="Accuratezza_4">
+				<name>Accuratezza (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1497 347 1572 393</position>
+			</node>
+			<node id="Posizione_Veicolo_4">
+				<name>Posizione Veicolo (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1487 108 1582 167</position>
+			</node>
+			<node id="Sensore_Posizione_4">
+				<name>Sensore Posizione (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1484 254 1585 317</position>
+			</node>
+			<node id="Azione_4">
+				<name>Azione (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1612 216 1658 242</position>
+			</node>
+			<node id="U_4">
+				<name>U (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1585 61 1612 93</position>
 			</node>
 		</genie>
 	</extensions>

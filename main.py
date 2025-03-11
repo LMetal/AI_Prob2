@@ -70,8 +70,12 @@ def action(i):
     print(f"d (destra)\t\t:\t{value[1]:.2f}")
     print(f"s (sinistra)\t:\t{value[2]:.2f}")
 
+    azioni = ["n (nulla)", "d (destra)", "s (sinistra)"]
+    azione_consigliata = azioni[value.index(max(value))]
+    print(f"\nAZIONE CONSIGLIATA : {azione_consigliata} [{max(value):.2f}]")
+
     azione = input("Scelta: ")
-    if azione == "c":
+    if azione == "n":
         net.set_evidence(action_name, "Nulla")
     elif azione == "d":
         net.set_evidence(action_name, "Destra")
@@ -87,6 +91,9 @@ def problema2():
     for i in range(TIME_STEPS):
         sensor_read(i)
         action(i)
+
+    utility = net.get_node_value("U_TOT")[0]
+    print(f"\n\nUtilità finale: {utility: .2f}")
 
 
 if __name__ == "__main__":
